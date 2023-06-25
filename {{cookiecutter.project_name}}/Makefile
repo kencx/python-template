@@ -12,26 +12,20 @@ check:
 clean: check
 	- rm *.txt
 
-objects = $(wildcard *.in)
-outputs := $(objects:.in=.txt)
-
 ## all: build all .txt files
-all: $(outputs)
-
-%.txt: %.in
-	pip-compile --verbose --generate-hashes --output-file $@ $<
-
-dev-requirements.txt: requirements.txt
+all: base dev
 
 ## base: build requirements.txt
-base: requirements.txt
+base: pyproject.toml
+	pip-compile --verbose --generate-hashes --output-file requirements.txt $<
 
 ## dev: build dev-requirements.txt
-dev: dev-requirements.txt
+dev: pyproject.toml base
+	pip-compile --verbose --extra dev --generate-hashes --output-file dev-requirements.txt $<
 
 ## pip.install: install all dependencies
-pip.install: $(outputs)
-	pip-sync --ask $(outputs)
+pip.install: requirements.txt dev-requirements.txt
+	pip-sync --ask requirements.txt dev-requirements.txt
 
 ## pip.install-base: install base dependencies only
 pip.install-base: requirements.txt
