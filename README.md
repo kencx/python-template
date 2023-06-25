@@ -1,12 +1,13 @@
 # python-template
-Personal cookiecutter template for Python projects.
+
+Cookiecutter template for quick setup of Python projects.
 
 ## Included
-- Package management with Poetry
+- Package management with pip-tools
 - pre-commit hooks
 - Linting with flake8, black, isort
 - Type Checking with mypy
-- Tests with pytest, pytest-cov
+- Tests with pytest
 - CI with Github Actions
 
 ## Usage
@@ -17,12 +18,12 @@ $ pipx install cookiecutter
 
 Set up a new project with this template
 ```bash
-$ cookiecutter https://github.com/kennethcheo/python-template.git
-$ cookiecutter git+ssh://git@github.com/kennethcheo/python-template.git
+$ cookiecutter git+ssh://git@github.com/kencx/python-template.git
+
+# pyproject.toml branch
+$ cookiecutter git+ssh://git@github.com/kencx/python-template.git -c pyproject.toml
 ```
 
 ### Todo
-- Configure dependence of `pre-commit` hooks versions to `poetry`
-- Consider `[nox](https://nox.thea.codes/en/stable/)` for automating test suite
-- Add Sphinx documentation generation when necessary
+- Consider `[nox](https://nox.thea.codes/en/stable/)` or tox
 - Add Build workflow
